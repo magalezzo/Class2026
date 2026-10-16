@@ -553,6 +553,7 @@
       { name: 'Luz Adriana', phone: '3108174788' }
     ],
     calTitle: 'A Night in Las Vegas',
+    mapLink: '',   /* enlace exacto de Google Maps del lugar (Compartir > Copiar enlace); si queda vacío se busca por nombre */
     place: 'Rancho El Encanto, Funza'
   };
 
@@ -675,7 +676,7 @@
   var calUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + enc(CONFIG.calTitle) +
     '&dates=' + CONFIG.calStart + '/' + CONFIG.calEnd +
     '&ctz=' + enc('America/Bogota') + '&location=' + enc(CONFIG.place);
-  var mapUrl = 'https://waze.com/ul?q=' + enc('Rancho El Encanto, Funza, Cundinamarca') + '&navigate=yes';
+  var mapUrl = CONFIG.mapLink || ('https://www.google.com/maps/search/?api=1&query=' + enc('Rancho El Encanto, Funza, Cundinamarca'));
   document.getElementById('btn-cal').href = calUrl;
   document.getElementById('lnk-cal').href = calUrl;
   document.getElementById('btn-map').href = mapUrl;
