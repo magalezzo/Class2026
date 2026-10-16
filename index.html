@@ -1041,6 +1041,15 @@
       } else { a.pause(); set(false); }
     });
     document.addEventListener('visibilitychange', function () { if (document.hidden && !a.paused) { a.pause(); set(false); } });
+    /* Primer toque en cualquier parte de la página: arranca la música (los celulares no permiten sonido sin un toque) */
+    function first(e) {
+      document.removeEventListener('pointerup', first, true);
+      document.removeEventListener('keydown', first, true);
+      if (e.target && e.target.closest && e.target.closest('#music')) return;
+      if (a.paused) { var pr = a.play(); if (pr && pr.then) pr.then(function () { set(true); }).catch(function () {}); }
+    }
+    document.addEventListener('pointerup', first, true);
+    document.addEventListener('keydown', first, true);
   })();
 </script>
 
